@@ -1,0 +1,27 @@
+`timescale 1ns / 1ps
+
+module Logic_Simulator(
+    input sw_a,
+    input sw_b,
+    input [2:0] sel,
+    output reg Led_out
+    );
+    
+    localparam And_Gate = 3'b000;
+    localparam OR_Gate = 3'b001;
+    localparam NAND_Gate = 3'b010;
+    localparam NOR_Gate = 3'b011;
+    localparam XOR_Gate = 3'b100;
+    
+    always @(*) begin
+     case(sel)
+     And_Gate : Led_out = sw_a & sw_b ;
+     OR_Gate : Led_out = sw_a | sw_b ;
+     NAND_Gate : Led_out = ~(sw_a & sw_b) ;
+     NOR_Gate : Led_out = ~(sw_a | sw_b) ;
+     XOR_Gate : Led_out = sw_a ^ sw_b ;
+     default : Led_out = 1'b0;
+     endcase
+     end
+          
+endmodule
